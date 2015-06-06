@@ -3,4 +3,11 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="fix_send_pre">我被咬了</string>
+    <string name="fix_send_end">个包 ╥﹏╥</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="laugh_count">嘲笑(%d)</string>
+    <string name="sympathy_count">同情(%d)</string>
 </resources>

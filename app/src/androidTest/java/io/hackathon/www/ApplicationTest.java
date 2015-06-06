@@ -1,4 +1,4 @@
-package com.linroid.www;
+package io.hackathon.www;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

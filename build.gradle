@@ -2,9 +2,13 @@ buildscript {
     repositories {
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven {
+            url "http://mvn.leancloud.cn/nexus/content/repositories/releases"
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.2.3'
+        classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
     }
 }
 
@@ -26,11 +30,14 @@ allprojects {
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+        maven {
+            url "http://mvn.leancloud.cn/nexus/content/repositories/releases"
+        }
     }
 }
 
 project(":android") {
-    apply plugin: "android"
+    apply plugin: "com.android.library"
 
     configurations { natives }
 
