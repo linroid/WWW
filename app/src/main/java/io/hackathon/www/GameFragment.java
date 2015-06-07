@@ -51,7 +51,7 @@ public class GameFragment extends Fragment {
         return view;
     }
 
-    @OnClick(R.id.btn_single)
+    @OnClick({R.id.btn_single, R.id.btn_double})
     public void onSingleBtnClick(ImageButton btn){
         Intent intent = new Intent(getActivity(), AndroidLauncher.class);
         startActivity(intent);
