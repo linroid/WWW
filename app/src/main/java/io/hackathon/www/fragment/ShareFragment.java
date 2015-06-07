@@ -1,4 +1,4 @@
-package io.hackathon.www;
+package io.hackathon.www.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -30,6 +30,9 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import hugo.weaving.DebugLog;
+import io.hackathon.www.R;
+import io.hackathon.www.WeiboService;
+import io.hackathon.www.WeiboUser;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;

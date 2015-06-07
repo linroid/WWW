@@ -1,4 +1,4 @@
-package io.hackathon.www;
+package io.hackathon.www.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,12 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import com.badlogic.gdx.Game;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import io.hackathon.www.R;
 import io.hackathon.www.android.GameLauncher;
+import io.hackathon.www.activity.GameOverActivity;
+import io.hackathon.www.activity.PropsActivity;
 
 
 public class GameFragment extends Fragment {

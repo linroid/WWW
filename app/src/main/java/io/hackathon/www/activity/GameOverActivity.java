@@ -1,13 +1,13 @@
-package io.hackathon.www;
+package io.hackathon.www.activity;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageButton;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.hackathon.www.R;
 import io.hackathon.www.android.GameLauncher;
 
 public class GameOverActivity extends AppCompatActivity {
