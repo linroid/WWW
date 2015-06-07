@@ -31,6 +31,7 @@ public class wwwGame extends ApplicationAdapter {
 	private int speed;
 	private OrthographicCamera camera;
 	Texture img;
+	private Rectangle lastDead;
 	private Texture dropImage;
 	private Texture bucketImage;
 	private Texture deadImage;
@@ -51,6 +52,7 @@ public class wwwGame extends ApplicationAdapter {
 	private Array<Rectangle> raindrops;
 	private Array<Rectangle> dieMosquitos;
 	private Array<Texture> tracks;
+	private int randomflag;
 	private long lastDropTime;
 	private final ScreenActivity screens;
 
@@ -69,6 +71,10 @@ public class wwwGame extends ApplicationAdapter {
 		tracks.add(track2);
 		speed = 1;
 
+		randomflag = 0;
+		lastDead = new Rectangle();
+		lastDead.x = 0;
+		lastDead.y = 0;
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
 		img = new Texture("badlogic.jpg");
@@ -81,6 +87,7 @@ public class wwwGame extends ApplicationAdapter {
 		dropSound = Gdx.audio.newSound(Gdx.files.internal(("slap.mp3")));
 		isfirst = 1;
 		rainMusic.setLooping(true);
+		rainMusic.setVolume((float)0.5);
 		rainMusic.play();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 800, 480);
@@ -171,6 +178,16 @@ public class wwwGame extends ApplicationAdapter {
 
 		batch.begin();
 		backgroundSprite.draw(batch);
+
+		if (dieMosquitos.size > 0) {
+			Rectangle justdead = dieMosquitos.get(dieMosquitos.size - 1);
+			if (lastDead.x != justdead.x || lastDead.y != justdead.y) {
+				lastDead.x = justdead.x;
+				lastDead.y = justdead.y;
+				randomflag = rand.nextInt(2);
+			}
+			batch.draw(tracks.get(randomflag), justdead.x - 20, justdead.y - 20, justdead.width, justdead.height);
+		}
 		for (Rectangle dead: dieMosquitos) {
 			batch.draw(deadImage, dead.x, dead.y, dead.width, dead.height);
 		}
@@ -191,9 +208,9 @@ public class wwwGame extends ApplicationAdapter {
 		batch.end();
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 		shapeRenderer.setColor(0xa4 / 255, 0xd8 / 255, 0xc7 / 255, 1);
-		shapeRenderer.rect(50, 20, 50 + 200, 38);
+		shapeRenderer.rect(50, 20, 50 + 200, 28);
 		shapeRenderer.setColor((float)0x0d/255, (float)0x74/255, (float)0x59/255, 0xff/255);
-		shapeRenderer.rect(50, 20, 50 + (int) (200 * (float)gameLogic.getHealth() / 2333), 38);
+		shapeRenderer.rect(50, 20, 50 + (int) (200 * (float)gameLogic.getHealth() / 2333), 28);
 		shapeRenderer.end();
 
 		// process user input
@@ -233,7 +250,7 @@ public class wwwGame extends ApplicationAdapter {
 				gameLogic.skipmosq(1);
 			}
 			else if(rect.contains(bucket)) {
-				dropSound.play();
+				dropSound.play((float)1.0);
 				dieMosquitos.add(rect);
 				gameLogic.killmosq(1);
 				if (dieMosquitos.size >= 10) {
@@ -261,7 +278,7 @@ public class wwwGame extends ApplicationAdapter {
 				iter.remove();
 			}
 			else if(rect.contains(bucket)) {
-				dropSound.play();
+				dropSound.play((float)1.0);
 				dieMosquitos.add(rect);
 				gameLogic.killmosq(2);
 				if (dieMosquitos.size >= 10) {
