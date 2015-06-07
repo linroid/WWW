@@ -77,11 +77,11 @@ public class wwwGame extends ApplicationAdapter {
 		deadImage = new Texture("dieMosquito.png");
 		advancedImage = new Texture("advancedMos.png");
 		levelImage = new Texture("levelup.png");
-		rainMusic = Gdx.audio.newMusic(Gdx.files.internal("bg.mp3"));
+		rainMusic = Gdx.audio.newMusic(Gdx.files.internal("bgm.mp3"));
 		dropSound = Gdx.audio.newSound(Gdx.files.internal(("slap.mp3")));
 		isfirst = 1;
-		//rainMusic.setLooping(true);
-		//rainMusic.play();
+		rainMusic.setLooping(true);
+		rainMusic.play();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 800, 480);
 		bucket = new Rectangle();
