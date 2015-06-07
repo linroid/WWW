@@ -26,6 +26,8 @@ import com.badlogic.gdx.utils.TimeUtils;
 public class wwwGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	BitmapFont font;
+	private int isfirst;
+	private long lastLevelTime;
 	private int speed;
 	private OrthographicCamera camera;
 	Texture img;
@@ -38,11 +40,13 @@ public class wwwGame extends ApplicationAdapter {
 	private Rectangle bucket;
 	private Random rand;
 	private GameLogic gameLogic;
+	private Texture levelImage;
 	public static Texture backgroundTexture;
 	public static Sprite backgroundSprite;
 
 	private Rectangle mytrack;
 	private ShapeRenderer shapeRenderer;
+	private Array<Long> levelupevents;
 	private Array<Rectangle> advancedMosquitos;
 	private Array<Rectangle> raindrops;
 	private Array<Rectangle> dieMosquitos;
@@ -64,6 +68,7 @@ public class wwwGame extends ApplicationAdapter {
 		tracks.add(track1);
 		tracks.add(track2);
 		speed = 1;
+
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
 		img = new Texture("badlogic.jpg");
@@ -71,8 +76,10 @@ public class wwwGame extends ApplicationAdapter {
 		bucketImage = new Texture("bucket.png");
 		deadImage = new Texture("dieMosquito.png");
 		advancedImage = new Texture("advancedMos.png");
+		levelImage = new Texture("levelup.png");
 		rainMusic = Gdx.audio.newMusic(Gdx.files.internal("bg.mp3"));
 		dropSound = Gdx.audio.newSound(Gdx.files.internal(("slap.mp3")));
+		isfirst = 1;
 		//rainMusic.setLooping(true);
 		//rainMusic.play();
 		camera = new OrthographicCamera();
@@ -90,6 +97,7 @@ public class wwwGame extends ApplicationAdapter {
 		raindrops = new Array<Rectangle>();
 		dieMosquitos = new Array<Rectangle>();
 		advancedMosquitos = new Array<Rectangle>();
+		levelupevents =new Array<Long>();
 		screens.pushMessage(1);
 		spawnRaindrop();
 	}
@@ -126,6 +134,16 @@ public class wwwGame extends ApplicationAdapter {
 		advancedMosquitos.add(mos);
 	}
 
+	public void levelup() {
+		for (Long lastTime: levelupevents) {
+			if(Math.abs(lastTime - TimeUtils.nanoTime()) < 2000000000) {
+				batch.draw(levelImage, 350, 240, 100, 60);
+			} else {
+				levelupevents.pop();
+			};
+		}
+	}
+
 	@Override
 	public void render () {
 		// clear the screen with a dark blue color. The
@@ -135,7 +153,7 @@ public class wwwGame extends ApplicationAdapter {
 		// Gdx.gl.glClearColor(0, 0, 0.2f, 1);
 		// Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		if (! gameLogic.isLive()) {
+		if (gameLogic.getHealth() < 0) {
 			// todo sth
 		}
 
@@ -161,7 +179,14 @@ public class wwwGame extends ApplicationAdapter {
 		for (Rectangle mosquito: advancedMosquitos) {
 			batch.draw(advancedImage, mosquito.x, mosquito.y, mosquito.width, mosquito.height);
 		}
+
 		font.draw(batch, "LV: 8" + "   Score:" + String.valueOf(gameLogic.getScore()), 20, 80, 200, 0, true);
+
+		if (gameLogic.getScore() > 100 && isfirst > 0) {
+			isfirst = 0;
+			levelupevents.add(TimeUtils.nanoTime());
+		}
+		levelup();
 		batch.end();
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 		shapeRenderer.setColor(0xa4 / 255, 0xd8 / 255, 0xc7 / 255, 1);
