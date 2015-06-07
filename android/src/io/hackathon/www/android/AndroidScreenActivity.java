@@ -30,5 +30,7 @@ public class AndroidScreenActivity implements ScreenActivity {
     @Override
     public void finish() {
         this.activity.setResult(Activity.RESULT_OK);
+        this.activity.finish();
+        this.activity.overridePendingTransition(0, 0);
     }
 }

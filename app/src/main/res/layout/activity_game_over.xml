@@ -25,12 +25,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:divider="@drawable/game_divider"
+            android:divider="@drawable/game_over_divider"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:layout_below="@id/lose"
             android:showDividers="middle"
-            android:layout_marginTop="40dp">
+            android:layout_marginTop="80dp">
 
             <ImageButton
                 android:id="@+id/btn_again"

@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".WWWApp"
@@ -38,7 +39,8 @@
         </activity>
         <activity
             android:name=".activity.GameOverActivity"
-            android:label="@string/title_activity_game_over" >
+            android:label="@string/title_activity_game_over"
+            android:launchMode="singleTop">
         </activity>
     </application>
 

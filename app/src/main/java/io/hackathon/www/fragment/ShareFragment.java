@@ -3,6 +3,7 @@ package io.hackathon.www.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -55,6 +56,7 @@ public class ShareFragment extends Fragment {
 
     String[] mosquitoAS;
     Random random = new Random();
+    Vibrator vibrator;
 
 
     private OnFragmentInteractionListener mListener;
@@ -72,6 +74,7 @@ public class ShareFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        vibrator = (Vibrator) getActivity().getSystemService(Activity.VIBRATOR_SERVICE);
         if (getArguments() != null) {
         }
     }
@@ -121,8 +124,9 @@ public class ShareFragment extends Fragment {
 
     @OnClick(R.id.mosquito)
     public void onMosQuittoClick(View view){
+        vibrator.vibrate(500);
         countET.setText(String.valueOf(getCount()+1));
-        if(Math.random()*10 > 6.0) {
+        if(Math.random()*10 > 8.0) {
             Toast.makeText(getActivity(), mosquitoAS[random.nextInt(mosquitoAS.length)], Toast.LENGTH_SHORT).show();
         }
     }
