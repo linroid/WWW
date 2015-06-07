@@ -1,4 +1,4 @@
-package io.hackathon.www;
+package io.hackathon.www.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,11 +14,8 @@ import android.view.ViewGroup;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
-import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
-import com.squareup.picasso.Picasso;
 
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -27,6 +24,9 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import hugo.weaving.DebugLog;
+import io.hackathon.www.R;
+import io.hackathon.www.TimelineAdapter;
+import io.hackathon.www.TopAdapter;
 
 /**
  * Created by linroid on 6/6/15.

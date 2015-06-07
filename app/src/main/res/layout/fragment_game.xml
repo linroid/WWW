@@ -3,7 +3,7 @@
     android:background="#1fba98"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.hackathon.www.GameFragment"
+    tools:context="io.hackathon.www.fragment.GameFragment"
     android:paddingLeft="8dp"
     android:paddingRight="8dp">
     <LinearLayout

@@ -155,6 +155,7 @@ public class wwwGame extends ApplicationAdapter {
 
 		if (gameLogic.getHealth() < 0) {
 			// todo sth
+			screens.finish(gameLogic.getScore());
 		}
 
 		// tell the camera to update its matrices.

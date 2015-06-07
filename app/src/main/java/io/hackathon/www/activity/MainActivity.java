@@ -1,4 +1,4 @@
-package io.hackathon.www;
+package io.hackathon.www.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,10 @@ import com.avos.sns.SNSType;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import hugo.weaving.DebugLog;
+import io.hackathon.www.fragment.GameFragment;
+import io.hackathon.www.fragment.LookFragment;
+import io.hackathon.www.R;
+import io.hackathon.www.fragment.ShareFragment;
 
 public class MainActivity extends AppCompatActivity implements ShareFragment.OnFragmentInteractionListener {
     public static final String STATE_PAGER_POSITION = "pager_position";

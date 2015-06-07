@@ -1,9 +1,11 @@
-package io.hackathon.www;
+package io.hackathon.www.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import io.hackathon.www.R;
 
 public class PropsActivity extends AppCompatActivity {
 

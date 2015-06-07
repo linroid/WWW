@@ -48,7 +48,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
 
         holder.content.setText(item.getString("content"));
         holder.laughCountBtn.setText(res.getString(R.string.laugh_count, item.getInt("laugh_count")));
-        holder.sympathyCountBtn.setText(res.getString(R.string.laugh_count, item.getInt("sympathy_count")));
+        holder.sympathyCountBtn.setText(res.getString(R.string.sympathy_count, item.getInt("sympathy_count")));
         final AVUser user = item.getAVObject("own");
         user.fetchInBackground(new GetCallback<AVObject>() {
             @Override

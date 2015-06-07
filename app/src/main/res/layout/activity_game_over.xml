@@ -1,0 +1,68 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1fba98">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/game_over_background"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="io.hackathon.www.activity.GameOverActivity">
+
+        <ImageView
+            android:id="@+id/lose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/lose" />
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:layout_below="@id/lose"
+            android:layout_marginTop="30dp"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:layout_centerHorizontal="true"
+            android:text="@string/score"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:divider="@drawable/game_over_divider"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_below="@id/lose"
+            android:showDividers="middle"
+            android:layout_marginTop="80dp">
+
+            <ImageButton
+                android:id="@+id/btn_again"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/again" />
+
+            <ImageButton
+                android:id="@+id/btn_props"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/props" />
+
+            <ImageButton
+                android:id="@+id/btn_exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/exit" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</FrameLayout>

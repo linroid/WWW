@@ -1,22 +1,25 @@
-package io.hackathon.www;
+package io.hackathon.www.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import io.hackathon.www.android.AndroidLauncher;
+import io.hackathon.www.R;
+import io.hackathon.www.android.GameLauncher;
+import io.hackathon.www.activity.GameOverActivity;
+import io.hackathon.www.activity.PropsActivity;
 
 
 public class GameFragment extends Fragment {
-
+    public static final int REQUEST_GAME = 0x1111;
     @InjectView(R.id.btn_single)
     ImageButton singleBtn;
     @InjectView(R.id.btn_double)
@@ -53,9 +56,20 @@ public class GameFragment extends Fragment {
 
     @OnClick({R.id.btn_single, R.id.btn_double})
     public void onSingleBtnClick(ImageButton btn){
-        Intent intent = new Intent(getActivity(), AndroidLauncher.class);
-        startActivity(intent);
+        Intent intent = new Intent(getActivity(), GameLauncher.class);
+        startActivityForResult(intent, REQUEST_GAME);
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_GAME && resultCode== Activity.RESULT_OK) {
+            Intent intent = new Intent(getActivity(), GameOverActivity.class);
+            intent.putExtras(data.getExtras());
+            startActivity(intent);
+        }
+    }
+
     @OnClick(R.id.btn_props)
     public void onPropsBtnClick(ImageButton btn) {
         Intent intent = new Intent(getActivity(), PropsActivity.class);

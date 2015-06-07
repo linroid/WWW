@@ -12,7 +12,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="io.hackathon.www.PropsActivity">
+        tools:context="io.hackathon.www.activity.PropsActivity">
 
         <ImageView
             android:id="@+id/logo"
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="12dp"
-                    android:text="喷雾(5)"
+                    android:text="喷雾(11)"
                     android:textColor="@color/primaryColor" />
             </LinearLayout>
 
@@ -135,7 +135,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="12dp"
-                    android:text="特殊蚊子(5)"
+                    android:text="特殊蚊子(1)"
                     android:textColor="@color/primaryColor" />
             </LinearLayout>
         </RelativeLayout>
