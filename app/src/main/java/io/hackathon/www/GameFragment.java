@@ -48,7 +48,6 @@ public class GameFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_game, container, false);
         ButterKnife.inject(this, view);
-
         return view;
     }
 
@@ -57,5 +56,9 @@ public class GameFragment extends Fragment {
         Intent intent = new Intent(getActivity(), AndroidLauncher.class);
         startActivity(intent);
     }
-
+    @OnClick(R.id.btn_props)
+    public void onPropsBtnClick(ImageButton btn) {
+        Intent intent = new Intent(getActivity(), PropsActivity.class);
+        startActivity(intent);
+    }
 }

@@ -36,12 +36,12 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class SendFragment extends Fragment {
+public class ShareFragment extends Fragment {
 
     @InjectView(R.id.et_count)
     EditText countET;
 
-    @InjectView(R.id.til_custom_send)
+    @InjectView(R.id.til_custom_share)
     TextInputLayout customSendTIL;
 
     @InjectView(R.id.mosquito)
@@ -56,14 +56,14 @@ public class SendFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public static SendFragment newInstance() {
-        SendFragment fragment = new SendFragment();
+    public static ShareFragment newInstance() {
+        ShareFragment fragment = new ShareFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
     }
 
-    public SendFragment() {
+    public ShareFragment() {
     }
 
     @Override
@@ -76,7 +76,7 @@ public class SendFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_send, container, false);
+        View view =  inflater.inflate(R.layout.fragment_share, container, false);
 
         ButterKnife.inject(this, view);
         mosquitoAS = getResources().getStringArray(R.array.mosquito);
