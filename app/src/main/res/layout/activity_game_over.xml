@@ -20,7 +20,16 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:src="@drawable/lose" />
-
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:layout_below="@id/lose"
+            android:layout_marginTop="30dp"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:layout_centerHorizontal="true"
+            android:text="@string/score"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
