@@ -1,12 +1,11 @@
 package io.hackathon.www.android;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import com.badlogic.gdx.Gdx;
 import io.hackathon.www.ScreenActivity;
-import android.net.Uri;
 
 
 /**
@@ -28,8 +27,10 @@ public class AndroidScreenActivity implements ScreenActivity {
     }
 
     @Override
-    public void finish() {
-        this.activity.setResult(Activity.RESULT_OK);
+    public void finish(int score) {
+        Intent intent = this.activity.getIntent();
+        intent.putExtra("score", score);
+        this.activity.setResult(Activity.RESULT_OK, intent);
         this.activity.finish();
         this.activity.overridePendingTransition(0, 0);
     }

@@ -65,6 +65,7 @@ public class GameFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_GAME && resultCode== Activity.RESULT_OK) {
             Intent intent = new Intent(getActivity(), GameOverActivity.class);
+            intent.putExtras(data.getExtras());
             startActivity(intent);
         }
     }

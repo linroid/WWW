@@ -5,5 +5,5 @@ package io.hackathon.www;
  */
 public interface ScreenActivity {
     public void pushMessage(int id);
-    public void finish();
+    public void finish(int score);
 }

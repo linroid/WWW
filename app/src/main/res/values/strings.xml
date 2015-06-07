@@ -12,4 +12,5 @@
     <string name="sympathy_count">同情(%d)</string>
     <string name="title_activity_props">PropsActivity</string>
     <string name="title_activity_game_over">GameOverActivity</string>
+    <string name="score">分数：%d</string>
 </resources>
