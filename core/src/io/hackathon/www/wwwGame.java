@@ -135,6 +135,10 @@ public class wwwGame extends ApplicationAdapter {
 		// Gdx.gl.glClearColor(0, 0, 0.2f, 1);
 		// Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+		if (! gameLogic.isLive()) {
+			// todo sth
+		}
+
 		// tell the camera to update its matrices.
 		camera.update();
 
@@ -161,9 +165,9 @@ public class wwwGame extends ApplicationAdapter {
 		batch.end();
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 		shapeRenderer.setColor(0xa4 / 255, 0xd8 / 255, 0xc7 / 255, 1);
-		shapeRenderer.rect(50, 20, 50 + 200, 30);
+		shapeRenderer.rect(50, 20, 50 + 200, 38);
 		shapeRenderer.setColor((float)0x0d/255, (float)0x74/255, (float)0x59/255, 0xff/255);
-		shapeRenderer.rect(50, 20, 50 + (int) (200 * (float)gameLogic.getHealth() / 2333), 30);
+		shapeRenderer.rect(50, 20, 50 + (int) (200 * (float)gameLogic.getHealth() / 2333), 38);
 		shapeRenderer.end();
 
 		// process user input
