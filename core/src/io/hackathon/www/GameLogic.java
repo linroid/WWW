@@ -20,6 +20,7 @@ public class GameLogic {
         // todo sth
         this.lastSecs = System.currentTimeMillis() / 1000;
         this.name = name;
+        this.health = 2333;
         this.score = 0;
         this.numOfAdvanced = 0;
     }
@@ -28,6 +29,9 @@ public class GameLogic {
         return level;
     }
 
+    public int getHealth() {
+       return health;
+    }
     public int getScore() {
         return score;
     }

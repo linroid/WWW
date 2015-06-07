@@ -7,12 +7,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+ import com.badlogic.gdx.graphics.Color;
  import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
+ import com.badlogic.gdx.graphics.g2d.Sprite;
+ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
@@ -35,8 +38,11 @@ public class wwwGame extends ApplicationAdapter {
 	private Rectangle bucket;
 	private Random rand;
 	private GameLogic gameLogic;
+	public static Texture backgroundTexture;
+	public static Sprite backgroundSprite;
 
 	private Rectangle mytrack;
+	private ShapeRenderer shapeRenderer;
 	private Array<Rectangle> advancedMosquitos;
 	private Array<Rectangle> raindrops;
 	private Array<Rectangle> dieMosquitos;
@@ -57,7 +63,9 @@ public class wwwGame extends ApplicationAdapter {
 		Texture track2 = new Texture("track2.png");
 		tracks.add(track1);
 		tracks.add(track2);
+		speed = 1;
 		batch = new SpriteBatch();
+		shapeRenderer = new ShapeRenderer();
 		img = new Texture("badlogic.jpg");
 		dropImage = new Texture("Mosquito.png");
 		bucketImage = new Texture("bucket.png");
@@ -72,9 +80,12 @@ public class wwwGame extends ApplicationAdapter {
 		bucket = new Rectangle();
 		bucket.x = 0;
 		bucket.y = 0;
-		bucket.width = 64;
-		bucket.height = 64;
+		bucket.width = 36;
+		bucket.height = 36;
 		rand = new Random();
+
+		backgroundTexture = new Texture("background.jpg");
+		backgroundSprite =new Sprite(backgroundTexture);
 
 		raindrops = new Array<Rectangle>();
 		dieMosquitos = new Array<Rectangle>();
@@ -121,8 +132,8 @@ public class wwwGame extends ApplicationAdapter {
 		// arguments to glClearColor are the red, green
 		// blue and alpha component in the range [0,1]
 		// of the color to be used to clear the screen.
-		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		// Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+		// Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		// tell the camera to update its matrices.
 		camera.update();
@@ -130,11 +141,13 @@ public class wwwGame extends ApplicationAdapter {
 		// tell the SpriteBatch to render in the
 		// coordinate system specified by the camera.
 		batch.setProjectionMatrix(camera.combined);
+		shapeRenderer.setProjectionMatrix(camera.combined);
 
 		// begin a new batch and draw the bucket and
 		// all drops
+
 		batch.begin();
-		font.draw(batch, String.valueOf(gameLogic.getScore()), 20, 20);
+		backgroundSprite.draw(batch);
 		for (Rectangle dead: dieMosquitos) {
 			batch.draw(deadImage, dead.x, dead.y, dead.width, dead.height);
 		}
@@ -144,7 +157,14 @@ public class wwwGame extends ApplicationAdapter {
 		for (Rectangle mosquito: advancedMosquitos) {
 			batch.draw(advancedImage, mosquito.x, mosquito.y, mosquito.width, mosquito.height);
 		}
+		font.draw(batch, "LV: 8" + "   Score:" + String.valueOf(gameLogic.getScore()), 20, 80, 200, 0, true);
 		batch.end();
+		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+		shapeRenderer.setColor(0xa4 / 255, 0xd8 / 255, 0xc7 / 255, 1);
+		shapeRenderer.rect(50, 20, 50 + 200, 30);
+		shapeRenderer.setColor((float)0x0d/255, (float)0x74/255, (float)0x59/255, 0xff/255);
+		shapeRenderer.rect(50, 20, 50 + (int) (200 * (float)gameLogic.getHealth() / 2333), 30);
+		shapeRenderer.end();
 
 		// process user input
 		if(Gdx.input.isTouched()) {
@@ -167,17 +187,25 @@ public class wwwGame extends ApplicationAdapter {
 		Iterator<Rectangle> iter = raindrops.iterator();
 		while(iter.hasNext()) {
 			Rectangle rect = iter.next();
-			int randValue = rand.nextInt();
-			int yrandValue =rand.nextInt();
-			rect.x -= Math.pow(-1, randValue) * speed * Gdx.graphics.getDeltaTime();
-			rect.y -= Math.pow(-1, yrandValue) * speed * Gdx.graphics.getDeltaTime();
-			rect.width = rect.width + rect.width * (float) 2 * Gdx.graphics.getDeltaTime();
-			rect.height = rect.height + rect.height * (float) 2 * Gdx.graphics.getDeltaTime();
-			if(rect.y + 64 < 0 || rect.y - 64 > 480 || rect.x < 0 || rect.x > 800) iter.remove();
-			else if(rect.overlaps(bucket)) {
+			int randValue = rand.nextInt(10);
+			int yrandValue =rand.nextInt(10);
+			rect.x -= (int) Math.pow(-1, randValue) * 200 * Gdx.graphics.getDeltaTime();
+			rect.y -= (int) Math.pow(-1, yrandValue) * 200 * Gdx.graphics.getDeltaTime();
+			rect.width = rect.width + rect.width * (float) 1 * Gdx.graphics.getDeltaTime();
+			rect.height = rect.height + rect.height * (float) 1 * Gdx.graphics.getDeltaTime();
+			if(rect.y + 64 < 0
+					|| rect.y - 64 > 480
+					|| rect.x < 0
+					|| rect.x > 800
+					|| rect.width > 128
+					|| rect.height > 128) {
+				iter.remove();
+				gameLogic.skipmosq(1);
+			}
+			else if(rect.contains(bucket)) {
 				dropSound.play();
 				dieMosquitos.add(rect);
-				gameLogic.killmosq(2);
+				gameLogic.killmosq(1);
 				if (dieMosquitos.size >= 10) {
 					dieMosquitos.removeIndex(0);
 				}
@@ -189,12 +217,20 @@ public class wwwGame extends ApplicationAdapter {
 			Rectangle rect = iter.next();
 			int randValue = rand.nextInt();
 			int yrandValue =rand.nextInt();
-			rect.x -= Math.pow(-1, randValue) * speed * 2 * Gdx.graphics.getDeltaTime();
-			rect.y -= Math.pow(-1, yrandValue) * speed * 2 * Gdx.graphics.getDeltaTime();
+			rect.x -= Math.pow(-1, randValue) * 500 * Gdx.graphics.getDeltaTime();
+			rect.y -= Math.pow(-1, yrandValue) * 500 * Gdx.graphics.getDeltaTime();
 			rect.width = rect.width + rect.width * (float) 2 * Gdx.graphics.getDeltaTime();
 			rect.height = rect.height + rect.height * (float) 2 * Gdx.graphics.getDeltaTime();
-			if(rect.y + 64 < 0 || rect.y - 64 > 480 || rect.x < 0 || rect.x > 800) iter.remove();
-			else if(rect.overlaps(bucket)) {
+			if(rect.y + 64 < 0
+					|| rect.y - 64 > 480
+					|| rect.x < 0
+					|| rect.x > 800
+					|| rect.width > 128
+					|| rect.height > 128) {
+				gameLogic.skipmosq(2);
+				iter.remove();
+			}
+			else if(rect.contains(bucket)) {
 				dropSound.play();
 				dieMosquitos.add(rect);
 				gameLogic.killmosq(2);

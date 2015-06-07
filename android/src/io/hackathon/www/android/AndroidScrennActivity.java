@@ -22,7 +22,7 @@ public class AndroidScrennActivity implements ScreenActivity {
     }
     public void pushMessage(int id) {
         Gdx.app.log("Tag:", "hello");
-        appContext.startActivity(new Intent(this.appContext, SubActivity.class));
+        // appContext.startActivity(new Intent(this.appContext, SubActivity.class));
         //Intent intent = new Intent(Intent.ACTION_VIEW, myUri);
         // appContext.startActivity(intent);
     }
