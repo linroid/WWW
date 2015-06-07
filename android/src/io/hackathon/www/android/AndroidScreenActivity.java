@@ -12,18 +12,23 @@ import android.net.Uri;
 /**
  * Created by bisunday on 6/6/15.
  */
-public class AndroidScrennActivity implements ScreenActivity {
+public class AndroidScreenActivity implements ScreenActivity {
     Handler uiThread;
-    Context appContext;
+    Activity activity;
 
-    public AndroidScrennActivity(Context appContext) {
+    public AndroidScreenActivity(Activity activity) {
         uiThread = new Handler();
-        this.appContext = appContext;
+        this.activity = activity;
     }
     public void pushMessage(int id) {
         Gdx.app.log("Tag:", "hello");
         // appContext.startActivity(new Intent(this.appContext, SubActivity.class));
         //Intent intent = new Intent(Intent.ACTION_VIEW, myUri);
         // appContext.startActivity(intent);
+    }
+
+    @Override
+    public void finish() {
+        this.activity.setResult(Activity.RESULT_OK);
     }
 }

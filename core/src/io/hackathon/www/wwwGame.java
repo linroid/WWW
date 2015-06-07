@@ -137,6 +137,7 @@ public class wwwGame extends ApplicationAdapter {
 
 		if (! gameLogic.isLive()) {
 			// todo sth
+			screens.finish();
 		}
 
 		// tell the camera to update its matrices.
