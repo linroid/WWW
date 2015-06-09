@@ -11,9 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.avos.avoscloud.AVCloudQueryResult;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.CloudQueryCallback;
 import com.avos.avoscloud.FindCallback;
 
 import java.text.DateFormat;
@@ -88,27 +90,47 @@ public class LookFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         calendar.setTimeInMillis(calendar.getTimeInMillis()-1000*60*60*24);
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        AVQuery<AVObject> queryTop = new AVQuery<AVObject>("FireLog");
+        String sqlTimeStart = dateFormat.format(calendar.getTime());
+        AVQuery<AVObject> queryTop = new AVQuery<AVObject>("TopBit");
 //        query.whereGreaterThan("createdAt", dateFormat.format(calendar.getTime()));
-        queryTop.orderByDescending("count");
-        queryTop.setLimit(6);
+        queryTop.orderByDescending("total");
+        queryTop.setLimit(4);
+        queryTop.setCachePolicy(AVQuery.CachePolicy.CACHE_THEN_NETWORK);
         queryTop.findInBackground(new FindCallback<AVObject>() {
             @DebugLog
             @Override
             public void done(List<AVObject> list, AVException e) {
                 topAdapter.setData(list);
-                refreshLayout.setRefreshing(false);
+//                stopRefreshIfCan();
             }
         });
+//        AVQuery.doCloudQueryInBackground("select sum(*) as total, own from FireLog group by own order by total desc limit 4", new CloudQueryCallback<AVCloudQueryResult>() {
+//            @Override
+//            public void done(AVCloudQueryResult queryResult, AVException e) {
+//                if(e==null){
+//                    topAdapter.setData(queryResult.getResults());
+//                    stopRefreshIfCan();
+//                }
+//
+//            }
+//        });
 
         AVQuery<AVObject> queryTimeline = new AVQuery<AVObject>("FireLog");
         queryTimeline.orderByDescending("createdAt");
+        queryTimeline.setCachePolicy(AVQuery.CachePolicy.CACHE_THEN_NETWORK);
         queryTimeline.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
-                timelineAdapter.setData(list);
-                refreshLayout.setRefreshing(false);
+                if(e==null){
+                    timelineAdapter.setData(list);
+                    stopRefreshIfCan();
+                }
             }
         });
+    }
+    private void stopRefreshIfCan(){
+        if(refreshLayout!=null && refreshLayout.isRefreshing()){
+            refreshLayout.setRefreshing(false);
+        }
     }
 }

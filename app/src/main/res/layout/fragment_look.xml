@@ -1,53 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v4.widget.SwipeRefreshLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/refresher">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingTop="@dimen/activity_vertical_margin">
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="今日TOP"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/primaryColor" />
-            <!--<View-->
-                <!--android:layout_width="200dp"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:background="?android:attr/dividerHorizontal" />-->
-            <io.hackathon.www.FixedRecyclerView
-                android:id="@+id/top_list"
-                android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:layout_marginTop="8dp"/>
-        </LinearLayout>
-        <View
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="今日TOP"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/primaryColor" />
+        <!--<View-->
+        <!--android:layout_width="200dp"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="?android:attr/dividerHorizontal" />-->
+        <io.hackathon.www.FixedRecyclerView
+            android:id="@+id/top_list"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/dividerHorizontal" />
+            android:layout_height="90dp"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/dividerHorizontal" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <io.hackathon.www.FixedRecyclerView
             android:id="@+id/timeline_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:clipToPadding="false"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"/>
-    </LinearLayout>
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin" />
 
-</android.support.v4.widget.SwipeRefreshLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

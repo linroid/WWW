@@ -126,7 +126,7 @@ public class ShareFragment extends Fragment {
     public void onMosQuittoClick(View view){
         vibrator.vibrate(500);
         countET.setText(String.valueOf(getCount()+1));
-        if(Math.random()*10 > 8.0) {
+        if(Math.random()*10 > 9.5) {
             Toast.makeText(getActivity(), mosquitoAS[random.nextInt(mosquitoAS.length)], Toast.LENGTH_SHORT).show();
         }
     }

@@ -20,7 +20,7 @@ import butterknife.InjectView;
  * Created by linroid on 6/6/15.
  */
 public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder>{
-    List<AVObject> data;
+    List<? extends AVObject> data;
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_top, parent, false);
@@ -32,7 +32,7 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder>{
         AVObject item = data.get(position);
 
         holder.level.setText(String.valueOf(position+1));
-        holder.count.setText(item.getInt("count")+"个包");
+        holder.count.setText(item.getInt("total")+"个包");
         final AVUser user = item.getAVObject("own");
         user.fetchInBackground(new GetCallback<AVObject>() {
             @Override
@@ -47,7 +47,7 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder>{
         return data==null ? 0 : data.size();
     }
 
-    public void setData(List<AVObject> list) {
+    public void setData(List<? extends AVObject> list) {
         this.data = list;
         notifyDataSetChanged();
     }
